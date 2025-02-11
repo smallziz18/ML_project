@@ -2,7 +2,6 @@ from typing import List
 
 from setuptools import setup, find_packages
 
-from typing import List
 
 from typing import List
 from pathlib import Path
