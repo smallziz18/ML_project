@@ -185,3 +185,6 @@ fabric.properties
  .idea
  log
  notebook
+/notebook/
+/artifacts/*
+/src/components/artifacts/
