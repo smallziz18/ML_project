@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Exam Performance Predictor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            color: white;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .form-control, .form-select {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+        }
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .form-control:focus, .form-select:focus {
+            background: rgba(255, 255, 255, 0.3);
+            outline: none;
+            box-shadow: none;
+        }
+        .btn-primary {
+            background: #ff7eb3;
+            border: none;
+            transition: 0.3s ease-in-out;
+        }
+        .btn-primary:hover {
+            background: #ff4f81;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>📊 Student Exam Performance</h1>
+    <form action="{{ url_for('predict')}}" method="post">
+        <legend class="text-center mb-4">🎯 Prediction Form</legend>
+
+        <div class="mb-3">
+            <label class="form-label">👤 Gender</label>
+            <select class="form-select" name="gender" required>
+                <option selected disabled value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">🌎 Race / Ethnicity</label>
+            <select class="form-select" name="ethnicity" required>
+                <option selected disabled value="">Select Ethnicity</option>
+                <option value="group A">Group A</option>
+                <option value="group B">Group B</option>
+                <option value="group C">Group C</option>
+                <option value="group D">Group D</option>
+                <option value="group E">Group E</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">🎓 Parental Education Level</label>
+            <select class="form-select" name="parental_level_of_education" required>
+                <option selected disabled value="">Select Education</option>
+                <option value="associate's degree">Associate's Degree</option>
+                <option value="bachelor's degree">Bachelor's Degree</option>
+                <option value="high school">High School</option>
+                <option value="master's degree">Master's Degree</option>
+                <option value="some college">Some College</option>
+                <option value="some high school">Some High School</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">🍽️ Lunch Type</label>
+            <select class="form-select" name="lunch" required>
+                <option selected disabled value="">Select Lunch Type</option>
+                <option value="free/reduced">Free/Reduced</option>
+                <option value="standard">Standard</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">📚 Test Preparation Course</label>
+            <select class="form-select" name="test_preparation_course" required>
+                <option selected disabled value="">Select Course</option>
+                <option value="none">None</option>
+                <option value="completed">Completed</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">✍️ Writing Score (0-100)</label>
+            <input type="number" class="form-control" name="writing_score" placeholder="Enter Writing Score" min="0" max="100" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">📖 Reading Score (0-100)</label>
+            <input type="number" class="form-control" name="reading_score" placeholder="Enter Reading Score" min="0" max="100" required>
+        </div>
+
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary">🚀 Predict Maths Score</button>
+        </div>
+    </form>
+
+    <h2 class="mt-4">🔮 Prediction: <span class="fw-bold">{{ results }}</span></h2>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
