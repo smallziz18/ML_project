@@ -45,7 +45,7 @@ from sklearn.metrics import r2_score
 import sys
 from src.exception import MyException
 
-def evaluate_models(X_train, y_train, X_test, y_test, models):
+def evaluate_models(X_train, y_train, X_test, y_test, models,param):
     """
     Entraîne et évalue plusieurs modèles de Machine Learning en utilisant le coefficient de détermination R².
 
@@ -81,7 +81,15 @@ def evaluate_models(X_train, y_train, X_test, y_test, models):
         for i in range(len(list(models))):  # Parcourt la liste des modèles
             model = list(models.values())[i]  # Récupère le modèle actuel
 
-            model.fit(X_train, y_train)  # Entraîne le modèle sur les données d'entraînement
+            para = param[list(models.keys())[i]]
+
+            gs = GridSearchCV(model, para, cv=3)
+            gs.fit(X_train, y_train)
+
+            model.set_params(**gs.best_params_)
+            model.fit(X_train, y_train)
+
+            #model.fit(X_train, y_train)  # Entraîne le modèle sur les données d'entraînement
 
             y_train_pred = model.predict(X_train)  # Prédictions sur l'entraînement
             y_test_pred = model.predict(X_test)  # Prédictions sur le test
